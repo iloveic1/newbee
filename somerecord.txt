@@ -1,0 +1,181 @@
+生成.engine文件
+./make_engine ../../../data/networks/make_engine.json
+
+解压gz
+tar -zxvf ./....gz
+
+解压cmake
+sudo tar -zxvf cmake-3.19.3-Linux-aarch64.tar.gz -C /usr/local
+
+build机 编译前关闭
+
+find ./ -type f |sort |xargs md5sum > /home/xxxx
+
+20 05 -> 
+
+tar -czf algorithm.gz ./algorithm
+tar -cf box-algo-2.2.6.5-2022051101.gz ./algorithm.gz ./algo-version.json
+
+
+******20220622******
+//查看依赖项
+ldd ./make_engine
+//
+echo $LD_LIBRARY_PATH
+//
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/xx/lib (在已有的LD_LIBRARY_PATH上添加)
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/nvidia/uniubi/AiBoxII-gongdi-tieta_20220622/build/aarch64/install/3rdparty/3rdparty/opencv/lib
+
+********************
+
+
+******20220623******
+//conda
+conda env list //查看虚拟环境
+
+
+******20220705******
+
+git branch -d <BranchName> //删除本地分支
+
+unsigned int(无符号常数)
+
+mutalbe的中文意思是“可变的，易变的”，跟constant（既C++中的const）是反义词。
+在C++中，mutable也是为了突破const的限制而设置的。被mutable修饰的变量，将永远处于可变的状态，即使在一个const函数中
+
+(=default) 补充默认函数
+(=delete) 删除默认函数
+在C++中约定如果一个类中自定义了带参数的构造函数，那么编译器就不会再自动生成默认构造函数，也就是说该类将不能默认创建对象，只能携带参数进行创建一个对象；但有时候需要创建一个默认的对象但是类中编译器又没有自动生成一个默认构造函数，那么为了让编译器生成这个默认构造函数就需要default这个属性。
+
+std::shared_mutex c++14
+std::shared_mutex用于管理可转移和共享所有权的互斥对象，适用场景比较特殊：一个或多个读线程同时读取共享资源，且只有一个写线程来修改这个资源，这种情况下才能从shared_mutex获取性能优势。
+
+- shared_lock是read lock。搭配std::shared_mutex使用，被锁后仍允许其他线程执行同样被shared_lock的代码。
+- lock_guard和unique_lock是write lock。被锁后不允许其他线程执行被shared_lock或unique_lock的代码。
+- 通常定义方式：
+-- typedef std::shared_lock<std::shared_mutex> ReadLock;
+-- typedef std::lock_guard<std::shared_mutex> WriteLock;
+
+std::numeric_limits<xx>::max()
+
+operator 是 C++ 的一个关键字，它和运算符（如 =）一起使用，表示一个运算符重载函数，在理解时可将 operator 和待重载的运算符整体（如 operator=）视为一个函数名
+
+std::pair<int, float>
+
+头文件<exception>
+std::exception 异常的基类
+
+纯虚函数 
+C++没有接口类，它通过使用纯虚函数来生成抽象类。抽象类可以作为接口的集合，实现了接口类的功能。
+C++中含有纯虚函数的类叫做抽象类，顾名思义，它本身就是行为抽象的集合，因此它只描述了有这个行为，但是并未描述行为的具体做法，具体的做法在派生类中去实现，不同的派生类有不同的实现。
+一般形式：
+class name
+{
+	virtual int32_t func1() = 0; //抽象类不去实现函数体
+}
+override 关键字
+作用：在成员函数声明或定义中，override 确保改函数为虚函数并覆写来自基类的虚函数。
+
+
+queue队列类
+push() 在队尾插入一个元素
+pop() 删除队列第一个元素
+size() 返回队列中元素个数
+empty() 如果队列空则返回true
+front() 返回队列中的第一个元素
+back() 返回队列中最后一个元素
+
+size_t 一般用于无符号整型
+
+
+std::vector reserve、resize
+并发：https://murphypei.github.io/blog/2019/04/cpp-concurrent-1.html
+
+多线程helloworld
+
+
+*******20200707*******
+struct X
+{
+    std::string s;
+    mutable std::mutex mtx;
+
+    const std::string& GetValue() const &
+    {
+        std::lock_guard<std::mutex> lk{ mtx };
+        return s;
+    }
+};
+
+void F(X& x)
+{
+    auto s = x.GetValue();
+    s = "aa";
+}
+
+void F1(const X& x)
+{
+	auto s = x.GetValue();
+	s = "aa";
+}
+
+void F3(X&& x)
+{
+	auto s = x.GetValue();
+	s = "aa";
+}
+
+
+void F2()
+{
+    X x;
+    x.GetValue();
+    std::move(x).GetValue();
+}
+
+
+********20220715*********
+git checkout <tag name> 切到tag
+git checkout -b <tag name> 
+
+MySQL最大连接数设置
+show variables like 'max_connections'; 查看当前最大连接数
+set global max_connections=1000; 设置当前最大连接数
+
+
+====================================
+破解gitkraken7.7.0版本
+7.7.0 下载地址：https://release.axocdn.com/win64/GitKrakenSetup-7.7.0.exe
+https://github.com/happyhope/GitCracken
+
+环境：
+node.js >=12
+yarn
+
+7.7.0需要切到对应commit
+git clone https://github.com/happyhope/GitCracken
+cd GitCracken/GitCracken/
+yarn install
+yarn build
+node dist/bin/gitcracken.js patcher
+
+禁用更新，修改host文件：
+windows： C:\Windows\System32\drivers\etc
+other:/etc/hosts
+
+添加：0.0.0.0 release.gitkraken.com
+====================================
+
+==============20220728==============
+df -ah 查看磁盘空间
+
+====================================
+==============20220923==============
+window10下查看文件md5
+Get-FileHash .\box-algo-2.4.5.7.2022092301.gz -Algorithm MD5
+
+====================================
+
+
